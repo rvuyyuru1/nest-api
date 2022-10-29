@@ -4,9 +4,31 @@ services:
     ports:
       - 5434:5432
     environment:
+      POSTGRES_USER: postgress
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: dev
+    networks:
+      - mynetwork
+
+  qa-db:
+    image: postgres:latest
+    ports:
+      - 5435:5432
+    environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 123
-      POSTGRES_DB: nest
+      POSTGRES_DB: qa
+    networks:
+      - mynetwork
+
+  test-db:
+    image: postgres:latest
+    ports:
+      - 5436:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: test
     networks:
       - mynetwork
 

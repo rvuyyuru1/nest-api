@@ -18,9 +18,12 @@ model User {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
   hash       String
+  Authtoken  Tokens[]
+
+  @@map("User")
 }
 
-model Authtoken {
+model Tokens {
   token_id       Int      @id @default(autoincrement())
   created_at     DateTime @default(now())
   updated_at     DateTime @updatedAt
@@ -29,14 +32,8 @@ model Authtoken {
   last_logout_at DateTime
   last_login_at  DateTime
   user_id        Int
+  user           User     @relation(fields: [user_id], references: [user_id])
   client_info    Json
-}
 
-model Bookmark {
-  bookmark_id Int      @id @default(autoincrement())
-  created_at  DateTime @default(now())
-  updated_at  DateTime @updatedAt
-  link        String
-  title       String
-  description String?
+  @@map("Tokens")
 }
